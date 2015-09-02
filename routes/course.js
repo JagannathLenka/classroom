@@ -18,6 +18,7 @@ router.post('/', function(req, res) {
     user_ratings: null,
     description: null,
     status: "approved"
+    
 	}	
 
    var db = req.db;
