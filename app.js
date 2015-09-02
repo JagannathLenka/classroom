@@ -36,8 +36,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use("/styles", express.static(__dirname + '/stylesheets'));
-app.use("/js", express.static(path.join(__dirname, 'public/javascripts')));
+app.use("/style", express.static(path.join(__dirname , 'public/stylesheets')));
+app.use("/js", express.static(path.join(__dirname , 'public/javascripts')));
 
 
 app.use('/', routes);

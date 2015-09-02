@@ -1,22 +1,27 @@
     
 
 <html ng-app="classroom">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
-    <style>
-        html                    { overflow-y:scroll; }
-        body                    { padding-top:50px; }
-        #todo-list              { margin-bottom:30px; }
-    </style>
+    <link rel="stylesheet" href="/style/bootstrap.min.css"><!-- load bootstrap ->
 
     <!-- SPELLS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
-    <script src="/js/classroom_controller.js"></script><!-- load angular -->
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/angular-bootstrap.js"></script>
+    <script src="/js/classroom_controller.js"></script> 
 
 
     <body ng-controller="courseController">
+        
+        <div ng-repeat="course in courses">
+               <div class="span2"> {{course.description}} 
+                    <div ng-repeat="video in course.videos">
+                        Name: {{video.name}}
+                             <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src={{video.url}}></iframe>    
+                            <div>    
+                    </div>            
 
-    	{{text}}
+                 </div>    
+        </div>         
     </body>	
 
 
