@@ -11,5 +11,20 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.post('/', function(req, res) {
+   newvideo = 
+   {name: req.body.name,
+    url:  'https://www.youtube.com/embed/' + req.body.url + '?autoplay=false',
+    user_ratings: null,
+    description: null,
+    status: "approved"
+	}	
+
+   var db = req.db;
+   var collection = db.get('course');
+   collection.update({_id: req.body.id}, { $addToSet: { videos: newvideo } } );
+   res.send(req.body.id);
+});
+
 
 module.exports = router;
