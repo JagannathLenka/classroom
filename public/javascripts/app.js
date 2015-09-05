@@ -1,14 +1,7 @@
-
-angular.module('myApp', []).config(function($sceDelegateProvider) {
-  $sceDelegateProvider.resourceUrlWhitelist([
-    // Allow same origin resource loads.
-    'self',
-    // Allow loading from our assets domain.  Notice the difference between * and **.
-    'http://www.youtube.com/**'
-  ]);
-
-  // The blacklist overrides the whitelist so the open redirect here is blocked.
-  $sceDelegateProvider.resourceUrlBlacklist([
-    'http://myapp.example.com/clickThru**'
-  ]);
-});
+angular.module('classroom', ['ui.router', 'ngResource','ngSanitize']).
+config(['$sceDelegateProvider', function($sceDelegateProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        'https://www.youtube.com/**'
+    ]);
+}]);
