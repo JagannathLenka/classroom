@@ -7,6 +7,35 @@ a {
   color: #00B7FF;
 }
 
+textarea {
+        text-align: justify;
+        white-space: normal;
+    }
+
+.container-columns {
+   width: 250px; 
+   border-top: 0px;
+   border-bottom: 0px;
+   border-style: solid;
+   border-color: grey;
+   min-width: 250px;
+   float: left;
+   margin-left: 5px;
+}
+
+.question-coulumns {
+   width: 200px; 
+   min-width: 200px;
+   height: 50px;
+   min-height: 50px;
+   margin-left: 5px;
+}
+
+.middle {
+  margin-left: 15px;
+}
+
+
 .addclass {
 	 width: 350px; 
 	 height: 245px;
