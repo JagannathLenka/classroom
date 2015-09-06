@@ -3,8 +3,8 @@
 	<link rel="stylesheet" href="/style/style.css">
 
     <!-- SPELLS -->
-    <script src="/js/angular.min.js"></script>
-    <script src="/js/angular-bootstrap.js"></script>
+    <script src="/js/libraries/angular.min.js"></script>
+    <script src="/js/libraries/angular-bootstrap.js"></script>
     <script src="/js/app.js"></script> 
     <script src="/js/assesment_controller.js"></script> 
 
@@ -16,34 +16,54 @@
 	</div>	
 	<div id="question" class="container-columns">
 		<div><button class="btn btn-info">Guess What</button></div>
-  		<ng-repeat ng-repeat="test in isha_tests track by $index">
-	  	<div>
-	  		<textarea class="question-coulumns">
-	 		</textarea>
-	 	</div>
+  		<div ng-repeat="test in isha_tests track by $index">
+		  	<div>
+		  		<textarea class="question-coulumns">
+		 		</textarea>
+		 	</div>
+		</div> 	
  	</div>
 
 	<div id="isha" class="container-columns">
 		<div><button class="btn btn-success">Isha</button></div>
 		<ng-repeat ng-repeat="test in isha_tests track by $index">
-	  	<div class="question-coulumns">
-	  		<div class="middle">
-	  			<input type="checkbox" ng-model="test" ng-change="play(test)">
-	    		<span ng-show="test" class="glyphicon glyphicon glyphicon-star" style="color:orange"> 	
-	    	</div>		
-	  	</div>
+		  	<div class="question-coulumns">
+		  		<div class="middle">
+		  			<input type="checkbox" ng-model="test" ng-change="play(test)">
+		    		<span ng-show="test" class="glyphicon glyphicon glyphicon-star" style="color:orange"> 	
+		    	</div>		
+		  	</div>
+	
 	</div>
 
 	<div id="causin" class="container-columns">
 		<div><button class="btn btn-warning">Causin</button></div>
 		<ng-repeat ng-repeat="test in causin_tests track by $index">
-	  	<div class="question-coulumns">
-	  		<div class="middle">
-	  			<input type="checkbox" ng-model="test">
-	    		<span ng-show="test" class="glyphicon glyphicon glyphicon-star" style="color:orange">
-	    	</div> 	
-	  	</div>
+		  	<div class="question-coulumns">
+		  		<div class="middle">
+		  			<input type="checkbox" ng-model="test">
+		    		<span ng-show="test" class="glyphicon glyphicon glyphicon-star" style="color:orange">
+		    	</div> 	
+		  	</div>
+	
 	</div>
+
+	<div id="question" class="container-columns">
+		<div><button class="btn btn-info">Scores</button></div>
+		<div>Aishwarya Gold Scores 
+			<div ng-repeat="a in final_score('aishwarya') track by $index">
+				<img src="/images/gold.jpeg" class="score-image">	
+			</div>		
+				<span class="glyphicon glyphicon glyphicon-plus" style="color:orange; margin-left: 20px" ng-click="add_score('aishwarya')">
+		</div>
+
+		<div style="clear: both">Causin Gold Scores 
+			<div ng-repeat="a in final_score('causin') track by $index">
+				<img src="/images/gold.jpeg" class="score-image">	
+			</div>			
+		</div>
+
+ 	</div>
 
   </body>
     	

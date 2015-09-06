@@ -16,7 +16,6 @@ angular.module('classroom', []).controller('courseController', function($scope, 
 
 
 	  $scope.save= function(id, name, url){
-	  	console.log(id);
 	  	dataObj = {id: id,
 	  			  name: name,
 	  			  url: url}
