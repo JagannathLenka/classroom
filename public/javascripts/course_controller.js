@@ -1,6 +1,4 @@
-angular.module('classroom', []).controller('courseController', function($scope, $http){
-	$scope.text = "New Text";
-	$scope.name = "";
+scotchApp.controller('courseController', function($scope, $http, $interval) {
 	$scope.youtubeurl = "";
 
 	$http.get('/course').

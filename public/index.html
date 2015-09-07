@@ -1,43 +1,49 @@
-    
-
-<html ng-app="classroom">
+<!-- index.html -->
+    <!DOCTYPE html>
+    <html ng-app="scotchApp"> 
+    <head>
     <link rel="stylesheet" href="/style/bootstrap.min.css">
-    <link rel="stylesheet" href="/style/style.css"><!-- load bootstrap ->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+    <link rel="stylesheet" href="/style/style.css">
 
     <!-- SPELLS -->
     <script src="/js/libraries/angular.min.js"></script>
-    <script src="/js/libraries/angular-bootstrap.js"></script>
-    <script src="/js/app.js"></script> 
-    <script src="/js/classroom_controller.js"></script> 
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+      <script src="js/script.js"></script>
+      <script src="js/assesment_controller.js"></script>
+      <script src="js/course_controller.js"></script>
 
+    </head>
+    <body ng-controller="mainController">
 
-    <body ng-controller="courseController">
+        <!-- HEADER AND NAVBAR -->
+        <header>
+            <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Kids Interactive Video</a>
+                </div>
 
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="#video"><i class="fa fa-shield"></i>Video Galary</a></li>
+                    <li><a href="#assesment"><i class="fa fa-comment"></i> Take a Test</a></li>
+                </ul>
+            </div>
+            </nav>
+        </header>
 
-        <div ng-repeat="course in courses">
-           <div class="span2" style="float: left; width: 1600px; height: 300px; margin: 20px"> 
-                <div class="btn btn-success"> {{course.description}}</div> 
-                <div style="width: 100%">
-                    <div ng-repeat="video in course.videos" style="float:left">
-                        <div> Name: {{video.name}} </div>                
-                        <div style="float:left;">
-                            <iframe width="350" height="250" class="embed-responsive-item" src={{video.url}} allowfullscreen>
-                             </iframe>      
-                        <div>        
-                    </div> 
-                </div>    
-            </div> 
-            <div>
-                <div>Add a new Video</div>
-                <div class="addclass dotted" style="margin: 10px">
-                    <div>Name.........<input type="text" ng-model="name"></div>
-                    <div>Youtube Video<input type="text" ng-model="youtubeurl"></div>
-                    <div>Comments.....<input type="textarea" ng-model="comment"></div>
-                    <div><button type="button" class="btn btn-sucess" ng-click="save(course._id, name, youtubeurl)">Save</button></div>  
-                </div> 
-            </div> 
-        </div>    
-    </body>	
+        <!-- MAIN CONTENT AND INJECTED VIEWS -->
+        <div id="main">
 
+          <div ng-view></div>
+          
 
-</html>
+            <!-- angular templating -->
+            <!-- this is where content will be injected -->
+
+        </div>
+
+    </body>
+    </html>

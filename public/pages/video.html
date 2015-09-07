@@ -1,0 +1,23 @@
+ <div ng-repeat="course in courses">
+           <div class="span2" style="float: left; width: 1600px; height: 300px; margin: 20px"> 
+                <div class="btn btn-success"> {{course.description}}</div> 
+                <div style="width: 100%">
+                    <div ng-repeat="video in course.videos" style="float:left">
+                        <div> Name: {{video.name}} </div>                
+                        <div style="float:left;">
+                            <iframe width="350" height="250" class="embed-responsive-item" src={{video.url}} allowfullscreen>
+                             </iframe>      
+                        <div>        
+                    </div> 
+                </div>    
+            </div> 
+            <div>
+                <div>Add a new Video</div>
+                <div class="addclass dotted" style="margin: 10px">
+                    <div>Name.........<input type="text" ng-model="name"></div>
+                    <div>Youtube Video<input type="text" ng-model="youtubeurl"></div>
+                    <div>Comments.....<input type="textarea" ng-model="comment"></div>
+                    <div><button type="button" class="btn btn-sucess" ng-click="save(course._id, name, youtubeurl)">Save</button></div>  
+                </div> 
+            </div> 
+        </div>    
