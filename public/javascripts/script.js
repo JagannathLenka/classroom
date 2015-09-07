@@ -1,4 +1,4 @@
-var scotchApp = angular.module('scotchApp', ['ngRoute']);
+var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate']);
 
 
 
@@ -8,19 +8,19 @@ var scotchApp = angular.module('scotchApp', ['ngRoute']);
 
             // route for the home page
             .when('/', {
-                templateUrl : '/pages/welcome.html',
+                templateUrl : '/pages/page-welcome.html',
                 controller  : 'courseController'
             })
 
             // route for the about page
             .when('/video', {
-                templateUrl : '/pages/video.html',
+                templateUrl : '/pages/page-video.html',
                 controller  : 'courseController'
             })
 
             // route for the contact page
             .when('/assesment', {
-                templateUrl : '/pages/asses.html',
+                templateUrl : '/pages/page-asses.html',
                 controller  : 'assesmentController'
             });
     });
