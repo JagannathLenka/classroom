@@ -64,26 +64,35 @@ scotchApp.controller('assesmentController', function($scope, $http, $interval) {
             
         }};
             
+        $scope.stop = function() {
+            $scope.reset = true
+        };
 
-        $scope.reset = function() {
-
+        $scope.start = function() {
+        $scope.reset = false    
         $scope.isha_tests =   [false, false, false, false, false, false, false, false];
         $scope.causin_tests = [false, false, false, false, false, false, false, false];
 
             var causin_test_counter = 0
-            var counter = 0
-            var rand = 0
+            var interval = 0
+            var min = 50
+            var max = 60
+            var rand = Math.floor(Math.random() * (max - min)) + min;
+
             $interval(function() {
 
+                    if($scope.reset == true) {
+                        return;
+                    }
+
                     if (causin_test_counter < $scope.causin_tests.length) { 
-                        console.log(causin_test_counter)
-                      
-                      counter = counter + 1;
-                      rand = Math.floor(Math.random() * 20) + 1;
-                      if (counter > 10 && counter <= rand) {
-                        causin_test_counter +=1;    
-                        $scope.causin_tests[causin_test_counter-1] = true
-                        counter = 0;
+                    interval += 1;    
+                    console.log(interval);                    
+                      if (interval >= rand) {
+                            causin_test_counter +=1;    
+                            $scope.causin_tests[causin_test_counter-1] = true
+                            interval = 0;
+                            rand = Math.floor(Math.random() * (max - min)) + min;
                       };
                     }  
 

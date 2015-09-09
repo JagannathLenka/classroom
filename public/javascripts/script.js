@@ -22,6 +22,11 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate']);
             .when('/assesment', {
                 templateUrl : '/pages/page-asses.html',
                 controller  : 'assesmentController'
+            })
+            // route for the contact page
+            .when('/add-video/:id', {
+                templateUrl : '/pages/page-add-video.html',
+                controller  : 'courseController'
             });
     });
 

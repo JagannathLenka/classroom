@@ -1,11 +1,15 @@
 
-	<div>
-		<div><button class="btn btn-danger" ng-click="reset()">Ready Steady Go...</button></div>
+<div class="container">
+	<div style="width:90%">
+		<div><button class="btn btn-success" style = "float:left" ng-click="start()">Ready Steady Go...</button></div>
+		<div><button class="btn btn-danger"  style = "float:left; margin-left: 5px" ng-click="stop()">Stop</button></div>
 	</div>	
+
+<div style="clear:both; margin-top:5px; width:90%">	
 	<div id="question" class="container-columns">
 		<div><button class="btn btn-info">Guess What</button></div>
   		<div ng-repeat="test in isha_tests track by $index">
-		  	<div>
+		  	<div class="question-coulumns">
 		  		<textarea class="question-coulumns">
 		 		</textarea>
 		 	</div>
@@ -14,26 +18,26 @@
 
 	<div id="isha" class="container-columns">
 		<div><button class="btn btn-success">Isha</button></div>
-		<ng-repeat ng-repeat="test in isha_tests track by $index">
+		<div ng-repeat="test in isha_tests track by $index">
 		  	<div class="question-coulumns">
 		  		<div class="middle">
 		  			<input type="checkbox" ng-model="test" ng-change="play(test, 'yeah')">
 		    		<span ng-show="test" class="glyphicon glyphicon glyphicon-star" style="color:orange"> 	
 		    	</div>		
 		  	</div>
-	
-	</div>
+		</div>
+	</div>	
 
 	<div id="causin" class="container-columns">
 		<div><button class="btn btn-warning">Causin</button></div>
-		<ng-repeat ng-repeat="test in causin_tests track by $index">
+		<div ng-repeat="test in causin_tests track by $index">
 		  	<div class="question-coulumns">
 		  		<div class="middle">
 		  			<input type="checkbox" ng-model="test">
 		    		<span ng-show="test" class="glyphicon glyphicon glyphicon-star" style="color:orange">
 		    	</div> 	
 		  	</div>
-	
+		</div>  		
 	</div>
 
 	<div id="question" class="container-columns">
@@ -51,5 +55,5 @@
 			</div>	
 			<span class="glyphicon glyphicon glyphicon-plus" style="color:orange; margin-left: 20px" ng-click="add_score('causin')">		
 		</div>
-
- 	</div>
+	</div>
+</div>

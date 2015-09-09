@@ -12,7 +12,13 @@ textarea {
         text-align: justify;
         white-space: normal;
         font-size: 20pt;
+        width: 100%;
+        background-color: transparent;
     }
+
+.container {
+  width: 1200px;
+}    
 
 .score-image {
   height: 18px;
@@ -20,14 +26,15 @@ textarea {
   float: left;
 }
 .container-columns {
-   width: 250px; 
+   width: 22%; 
    border-top: 0px;
    border-bottom: 0px;
    border-style: solid;
    border-color: grey;
-   min-width: 250px;
+   min-width: 30%px;
    float: left;
    margin-left: 5px;
+   
 }
 
 .question-coulumns {
@@ -52,20 +59,8 @@ textarea {
 	 float: left;
 }
 
-.dotted {
-  padding: 2.25em 1.6875em;
-  background-image: -webkit-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-  background-image: -moz-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-  background-image: -ms-repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-  background-image: repeating-radial-gradient(center center, rgba(0,0,0,.2), rgba(0,0,0,.2) 1px, transparent 1px, transparent 100%);
-  -webkit-background-size: 3px 3px;
-  -moz-background-size: 3px 3px;
-  background-size: 3px 3px;
-  }
+.ng-enter        { animation:slideInRight 0.5s both ease-in; }
 
-
-.ng-enter           { animation: slideOutLeft 0.5s both ease-in; z-index: 9999; }
-.ng-leave           { animation: slideOutLeft 0.5s both ease-in; z-index: 9999; }
 
 
 

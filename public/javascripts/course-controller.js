@@ -1,4 +1,4 @@
-scotchApp.controller('courseController', function($scope, $http, $interval) {
+scotchApp.controller('courseController', function($scope, $http, $interval, $routeParams) {
 	$scope.youtubeurl = "";
 
 	$http.get('/course').
@@ -14,9 +14,10 @@ scotchApp.controller('courseController', function($scope, $http, $interval) {
 
 
 	  $scope.save= function(id, name, url){
-	  	dataObj = {id: id,
+	  	dataObj = {id: $routeParams.id,
 	  			  name: name,
 	  			  url: url}
+	  			  console.log(dataObj)
 	  	var res = $http.post('/course', dataObj).
    			 success(function(data, status, headers, config) {
         	// this callback will be called asynchronously
