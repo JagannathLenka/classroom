@@ -1,23 +1,20 @@
+//=============Packages====================//
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var app = express();
+var morgan = require('morgan');
+var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 //mongo
 var mongo = require('mongodb');
 var monk = require ('monk');
-var db = monk('mongodb://jagannath_lenka:Apple123@ds035673.mongolab.com:35673/classroom');
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
+var mongoose = require('mongoose'); //for mongoose framework
 
 
-
+var app = express();
 
 
 // view engine setup
@@ -34,11 +31,34 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/style", express.static(path.join(__dirname , 'public/stylesheets')));
 app.use("/js", express.static(path.join(__dirname , 'public/javascripts')));
 
+
+//for mongoose framework
+var config = require('./config/config');  
+mongoose.connect(config.database); // connect to database
+app.set('superSecret', config.secret); // secret variable
+
+var db = monk('mongodb://jagannath_lenka:Apple123@ds035673.mongolab.com:35673/classroom');
+
+
+//controllers
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var course = require('./routes/course');
 var score = require('./routes/score');
 
+//models
+var user   = require('./models/user'); 
+
+app.use(function(req,res,next){
+    req.db = db;
+    req.user = user; 
+    req.jwt = jwt;
+    req.secret = app.get('superSecret');
+    next();
+});
+
+
+//routes
 app.use('/', routes);
 app.use('/users', users);
 app.use('/course', course);
