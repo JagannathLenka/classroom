@@ -75,8 +75,8 @@ scotchApp.controller('assesmentController', function($scope, $http, $interval) {
 
             var causin_test_counter = 0
             var interval = 0
-            var min = 50
-            var max = 60
+            var min = 10
+            var max = 20
             var rand = Math.floor(Math.random() * (max - min)) + min;
 
             $interval(function() {

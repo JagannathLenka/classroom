@@ -11,7 +11,7 @@ a {
 textarea {
         text-align: justify;
         white-space: normal;
-        font-size: 20pt;
+        font-size: 10pt;
         width: 100%;
         background-color: transparent;
     }
@@ -19,6 +19,12 @@ textarea {
 .container {
   width: 1200px;
 }    
+
+.story {
+  margin: 30px;
+  width: 1200px;
+  font-size: 25px;
+}   
 
 .score-image {
   height: 18px;

@@ -42,14 +42,14 @@
 
 	<div id="question" class="container-columns">
 		<div><button class="btn btn-info">Scores</button></div>
-		<div>Aishwarya Gold Scores
+		<div>Aishwarya Gold Scores - {{no_of_aishwarya_gold.length}}
 			<div ng-repeat="a in no_of_aishwarya_gold track by $index">
 				<img src="/images/gold.jpeg" class="score-image">	
 			</div>		
 				<span class="glyphicon glyphicon glyphicon-plus" style="color:orange; margin-left: 20px" ng-click="add_score('aishwarya')">
 		</div>
 
-		<div style="clear: both">Causin Gold Scores
+		<div style="clear: both">Causin Gold Scores -  {{no_of_causin_gold.length}}
 			<div ng-repeat="a in no_of_causin_gold track by $index">
 				<img src="/images/gold.jpeg" class="score-image">	
 			</div>	

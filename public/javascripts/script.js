@@ -27,6 +27,12 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate']);
             .when('/add-video/:id', {
                 templateUrl : '/pages/page-add-video.html',
                 controller  : 'courseController'
+            })
+
+             // route for the contact page
+            .when('/story-time', {
+                templateUrl : '/pages/page-story-time.html',
+                controller  : 'courseController'
             });
     });
 
