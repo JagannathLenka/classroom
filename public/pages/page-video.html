@@ -1,16 +1,18 @@
  <div ng-repeat="course in courses">
-           <div class="span2" style="float: left; width: 1600px; height: 300px; margin: 20px"> 
+           <div class="span2" style="float: left; width: 800px; height: 300px; margin: 20px"> 
                 <div class="btn btn-success"> {{course.description}}</div>
                 <div class="btn btn-warning"><a href="#add-video/{{course._id}}"><i class="fa fa-plus"></i></a></div>
                 
-                <div style="width: 100%">
-                    <div ng-repeat="video in course.videos" style="float:left">
+                <div class="video-container">
+
+                    <div ng-repeat="video in course.videos" class="slide">
                         <div> Name: {{video.name}} </div>                
                         <div style="float:left;">
                             <iframe width="350" height="250" class="embed-responsive-item" src={{video.url}} allowfullscreen>
                              </iframe>      
                         <div>        
                     </div> 
+
                 </div>    
             </div> 
             
