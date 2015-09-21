@@ -1,7 +1,7 @@
  <div ng-repeat="course in courses">
            <div class="span2" style="float: left; width: 800px; height: 300px; margin: 20px"> 
                 <div class="btn btn-success"> {{course.description}}</div>
-                <div class="btn btn-warning"><a href="#add-video/{{course._id}}"><i class="fa fa-plus"></i></a></div>
+                <div class="btn btn-warning" ng-click="open(course._id)"><i class="fa fa-plus"></i></div>
                 
                 <div class="video-container">
 

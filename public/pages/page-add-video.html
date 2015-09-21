@@ -1,10 +1,17 @@
-	<div style="background-color:#5bc0de; width: 300px; max-width: 300px; margin-left: 300px" >
-        <div>Add a new Video</div>
+    <div class="modal-header">
+        <h3 class="modal-title">Add a new Video</h3>
+    </div>
+    
+    <div class="modal-body">
         <div>
             <div>Name.............<input type="text" ng-model="name"></div>
             <div>Youtube Video<input type="text" ng-model="youtubeurl"></div>
             <div>Comments......<input type="textarea" ng-model="comment"></div>
-            <div><button type="button" class="btn btn-sucess" ng-click="save(course._id, name, youtubeurl)">Save</button></div>  
+              
         </div> 
-        <div class="btn btn-warning"><a href="#video">Back to Video<i class="fa fa-chevron-circle-left"></i></a></div>
-     </div> 
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="save(id, name, youtubeurl)">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+    </div>

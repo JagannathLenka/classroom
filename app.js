@@ -49,11 +49,21 @@ var score = require('./routes/score');
 //models
 var user   = require('./models/user'); 
 
+//services
+var service = require('./services/service');
+
 app.use(function(req,res,next){
     req.db = db;
     req.user = user; 
     req.jwt = jwt;
     req.secret = app.get('superSecret');
+    req.service = service;
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+
+
     next();
 });
 

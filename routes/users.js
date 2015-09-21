@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var service = require('../services/service.js');
 
 
 /* GET users listing. */
@@ -15,27 +16,42 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/setup', function(req, res) {
+router.post('/signup', function(req, res){
+	var User = req.user;
+	var jwt = req.jwt;
+	var secret = req.secret;
 
-   var User = req.user;
+	User.findOne({
+		name: req.body.name
+	}, function(err, user) {
+		if (err) throw err;
 
-  // create a sample user
-  var name = new User({ 
-    name: 'Jagannath', 
-    password: 'password',
-    admin: true 
-  });
-
-  // save the sample user
-  name.save(function(err) {
-    if (err) throw err;
-
-    console.log('User saved successfully');
-    res.json({ success: true });
-  });
+		if (user) {
+			res.json({success: false, message: 'User Already exists'});
+		}
+		else {
+				var addUser = new User;
+				addUser.name = req.body.name;
+				addUser.password = req.body.password;
+				addUser.token = jwt.sign(addUser, secret, {
+          				expiresInMinutes: 1440 // expires in 24 hours
+        			});
+				addUser.save(function(err, user){
+					if (err) {
+						res.json({success: false, message: 'Not able to create new user'});
+					}	
+					res.json({
+        			success: true,
+        			message: 'Enjoy your token !',
+        			token: addUser.token
+        		});	
+			})        		
+		}
+	});
 });
 
-router.post('/authenticate', function(req, res){
+
+router.post('/signin', function(req, res){
 	var User = req.user;
 	var jwt = req.jwt;
 	var secret = req.secret;
@@ -53,18 +69,41 @@ router.post('/authenticate', function(req, res){
 			if (user.password != req.body.password) {
 				res.json({success: false, message: 'Authentication failed ! Wrong password'});	
 			} else {
-				var token = jwt.sign(user, secret, {
-          		expiresInMinutes: 1440 // expires in 24 hours
-        		});
-
         		res.json({
         			success: true,
         			message: 'Enjoy your token !',
-        			token: token
+        			token: user.token
         		});
 			}
 		}
 	});
 });
+
+
+router.get('/me', service.ensureAuthorized, function(req, res) {
+	var User = req.user;
+
+    User.findOne({token: req.token}, function(err, user) {
+        if (err) {
+            res.json({
+                type: false,
+                data: "Error occured: " + err
+            });
+        } else if(user) {
+            res.json({
+                type: true,
+                data: user
+            });
+        } else {
+        	 console.log(' me not working')
+        	 console.log('me' +req.token)
+        	 res.json({
+                type: false,
+                data: 'User not authorized'
+            });
+        }
+    });
+});
+
 
 module.exports = router;

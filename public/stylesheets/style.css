@@ -1,3 +1,30 @@
+body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+textarea {
+        text-align: justify;
+        white-space: normal;
+        font-size: 10pt;
+        width: 100%;
+        background-color: transparent;
+    }
+
+.login-box {
+    margin-top: 5%;
+    padding: 2%;
+    background: #f1f1f1;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    font-family: Avenir,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
 .video-container
 {
     width: 1200px;
@@ -15,23 +42,6 @@
     /*float: left;*/
 }
 
-
-body {
-  padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
-textarea {
-        text-align: justify;
-        white-space: normal;
-        font-size: 10pt;
-        width: 100%;
-        background-color: transparent;
-    }
 
 .container {
   width: 1200px;
@@ -82,7 +92,7 @@ textarea {
 	 float: left;
 }
 
-.ng-enter        { animation:slideInRight 0.5s both ease-in; }
+.ng-enters        { animation:slideInRight 0.5s both ease-in; }
 
 
 
