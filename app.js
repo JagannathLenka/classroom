@@ -68,11 +68,72 @@ app.use(function(req,res,next){
 });
 
 
+//==========Token Management================================
+var router = express.Router();
+//=========================================================
+
+router.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.param('token') || req.headers['authorization'];
+
+  console.log(req.headers);
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, app.get('superSecret'), function(err, decoded) {      
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+      } else {
+        // if everything is good, save to request for use in other routes
+        console.log(decoded);
+        req.decoded = decoded;  
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send({ 
+      success: false, 
+      message: 'No token provided.'
+    });
+    
+  }
+  
+});
+
+// ---------------------------------------------------------
+// authenticated routes
+// ---------------------------------------------------------
+router.get('/', function(req, res) {
+  res.json({ message: 'Welcome to the coolest API on earth!' });
+});
+
+router.get('/users', function(req, res) {
+  User.find({}, function(err, users) {
+    res.json(users);
+  });
+});
+
+router.get('/check', function(req, res) {
+  res.json(req.decoded);
+});
+
+app.use('/api', router);
+
+//==================================
+
+
 //routes
 app.use('/', routes);
 app.use('/users', users);
-app.use('/course', course);
-app.use('/score', score);
+app.use('/api/course', course);
+app.use('/api/score', score);
 
 
 // catch 404 and forward to error handler

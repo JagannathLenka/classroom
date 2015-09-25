@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var service = require('../services/service.js');
 
 
 /* GET users listing. */
@@ -78,32 +77,5 @@ router.post('/signin', function(req, res){
 		}
 	});
 });
-
-
-router.get('/me', service.ensureAuthorized, function(req, res) {
-	var User = req.user;
-
-    User.findOne({token: req.token}, function(err, user) {
-        if (err) {
-            res.json({
-                type: false,
-                data: "Error occured: " + err
-            });
-        } else if(user) {
-            res.json({
-                type: true,
-                data: user
-            });
-        } else {
-        	 console.log(' me not working')
-        	 console.log('me' +req.token)
-        	 res.json({
-                type: false,
-                data: 'User not authorized'
-            });
-        }
-    });
-});
-
 
 module.exports = router;

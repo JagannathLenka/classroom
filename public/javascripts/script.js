@@ -43,6 +43,28 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
     });
 
 
+    scotchApp.factory('authInterceptor', function ($rootScope, $q, $window, $localStorage) {
+      return {
+        request: function (config) {
+          config.headers = config.headers || {};
+          if ($localStorage.token) {
+            config.headers.authorization = $localStorage.token;
+          }
+          return config;
+        },
+        response: function (response) {
+          if (response.status === 401) {
+            // handle the case where the user is not authenticated
+          }
+          return response || $q.when(response);
+        }
+      };
+    });
+
+    scotchApp.config(function ($httpProvider) {
+      $httpProvider.interceptors.push('authInterceptor');
+    });
+
 
     // create the controller and inject Angular's $scope
     scotchApp.controller('mainController', function($scope) {

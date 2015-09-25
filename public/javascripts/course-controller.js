@@ -1,7 +1,7 @@
 scotchApp.controller('courseController', function($scope, $http,  $interval, $routeParams, $modal, $log) {
 	$scope.youtubeurl = "";
 
-	$http.get('/course').
+	$http.get('/api/course').
 	  then(function(response) {
 
 	  	$scope.courses = response.data;
@@ -30,7 +30,7 @@ scotchApp.controller('courseController', function($scope, $http,  $interval, $ro
     modalInstance.result.then(function (success) {
 
     	if (success) {
-    		$http.get('/course').
+    		$http.get('/api/course').
 	 		 then(function(response) {
 	  			$scope.courses = response.data;
 	 		 }, function(response) {

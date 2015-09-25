@@ -3,7 +3,7 @@ scotchApp.controller('assesmentController', function($scope, $http, $interval) {
         $scope.causin_tests = [false, false, false, false, false, false, false, false];
 
         $scope.final_score = function() {   
-            $http.get('/score').
+            $http.get('/api/score').
               then(function(response) {
                     $scope.score = response.data;
                     $scope.aishwarya = response.data[0];
