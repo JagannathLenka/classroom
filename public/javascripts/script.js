@@ -1,6 +1,5 @@
 var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootstrap', 'ngStorage']);
-
-
+    
 
 	// configure our routes
     scotchApp.config(function($routeProvider) {
@@ -12,10 +11,16 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
                 controller  : 'loginController'
             })
 
+             .when('/logout', {
+                templateUrl : '/pages/page-logout.html',
+                controller  : 'loginController'
+            })
+
+
             // route for the welcome page
             .when('/welcome', {
                 templateUrl : '/pages/page-welcome.html',
-                controller  : 'courseController'
+                controller  : 'welcomeController'
             })
 
             // route for the about page
@@ -27,7 +32,10 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
             // route for the contact page
             .when('/assesment', {
                 templateUrl : '/pages/page-asses.html',
-                controller  : 'assesmentController'
+                controller  : 'assesmentController',
+                resolve     : {
+
+                }
             })
             // route for the contact page
             .when('/add-video/:id', {
@@ -38,11 +46,11 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
              // route for the contact page
             .when('/story-time', {
                 templateUrl : '/pages/page-story-time.html',
-                controller  : 'courseController'
+                controller  : 'storyController'
             });
     });
 
-
+    //Intercept the authority
     scotchApp.factory('authInterceptor', function ($rootScope, $q, $window, $localStorage) {
       return {
         request: function (config) {
@@ -55,11 +63,84 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
         response: function (response) {
           if (response.status === 401) {
             // handle the case where the user is not authenticated
-          }
+          } 
           return response || $q.when(response);
         }
       };
     });
+
+
+
+   scotchApp.factory('Auth', function ($rootScope, $q, $window, $http, $localStorage) {
+       function urlBase64Decode(str) {
+           var output = str.replace('-', '+').replace('_', '/');
+           switch (output.length % 4) {
+               case 0:
+                   break;
+               case 2:
+                   output += '==';
+                   break;
+               case 3:
+                   output += '=';
+                   break;
+               default:
+                   throw 'Illegal base64url string!';
+           }
+           return window.atob(output);
+       }
+
+       function getClaimsFromToken() {
+           var token = $localStorage.token;
+           var user = {};
+           if (typeof token !== 'undefined') {
+               var encoded = token.split('.')[1];
+               user = JSON.parse(urlBase64Decode(encoded));
+           }
+           return user;
+       }
+
+       var tokenClaims = getClaimsFromToken();
+
+       return {
+
+           signup: function (data, success, error) {
+               $http.post('/users/signup', data).success(success).error(error)
+           },
+           login: function (data, success, error) {
+               $http.post('/users/signin', data).success(success).error(error)
+           },
+           logout: function (success) {
+               tokenClaims = {};
+               delete $localStorage.token;
+               success();
+           },
+           getTokenClaims: function () {
+               return getClaimsFromToken();
+           }
+
+       };
+   });
+
+
+    //Check if the user is logged in or not
+    scotchApp.run(function($rootScope, $localStorage, $location, Auth) {
+        $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+           if(! $localStorage.token) {
+            if ( next.templateUrl != '/pages/page-login.html') {
+                    $location.path('/');
+                } 
+           }else{
+                if ( next.templateUrl === '/pages/page-logout.html') {
+                    Auth.logout(function() {
+                        console.log('Logged Out');
+                        $rootScope.loggdinUser = null;
+                        $location.path('/');
+                    });
+                };    
+           }; 
+        });
+    });
+
 
     scotchApp.config(function ($httpProvider) {
       $httpProvider.interceptors.push('authInterceptor');
@@ -67,9 +148,18 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
 
 
     // create the controller and inject Angular's $scope
-    scotchApp.controller('mainController', function($scope) {
+    scotchApp.controller('mainController', function($scope, Auth) {
         // create a message to display in our view
+        if (Auth.getTokenClaims()) 
+        $scope.name =  Auth.getTokenClaims().name;
+
         $scope.message = 'Everyone come and see how good I look!';
+    });
+
+    // create the controller and inject Angular's $scope
+    scotchApp.controller('welcomeController', function($scope, $rootScope, Auth) {
+        if (Auth.getTokenClaims()) 
+        $scope.name =  Auth.getTokenClaims().name;
     });
 
     scotchApp.controller('contactController', function($scope) {
