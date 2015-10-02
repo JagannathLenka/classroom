@@ -24,10 +24,10 @@
       <script src="js/assesment-controller.js"></script>
       <script src="js/course-controller.js"></script>
       <script src="js/login-controller.js"></script>
+      <script src="js/story-controller.js"></script>
 
     </head>
     <body ng-controller="mainController">
-
         <!-- HEADER AND NAVBAR -->
         <header>
             <nav class="navbar navbar-default">
@@ -44,7 +44,7 @@
                    <li>
                     <span class="nav" dropdown on-toggle="toggled(open)">
                         <a href="" class="dropdown-toggle nav" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
-                          Welcome<span class="caret"></span>
+                          Welcome {{name}}<span class="caret"></span>
                         </a>
                       <ul class="dropdown-menu">
                         <li><a href="#logout">Log Out</a></li>

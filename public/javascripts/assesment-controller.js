@@ -1,4 +1,5 @@
-scotchApp.controller('assesmentController', function($scope, $http, $interval) {
+scotchApp.controller('assesmentController', function($scope, $http, $interval, Auth) {
+
         $scope.isha_tests =   [false, false, false, false, false, false, false, false];
         $scope.causin_tests = [false, false, false, false, false, false, false, false];
 
@@ -75,8 +76,8 @@ scotchApp.controller('assesmentController', function($scope, $http, $interval) {
 
             var causin_test_counter = 0
             var interval = 0
-            var min = 10
-            var max = 20
+            var min = 20
+            var max = 30
             var rand = Math.floor(Math.random() * (max - min)) + min;
 
             $interval(function() {

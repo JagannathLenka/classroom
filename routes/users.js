@@ -32,7 +32,7 @@ router.post('/signup', function(req, res){
 				var addUser = new User;
 				addUser.name = req.body.name;
 				addUser.password = req.body.password;
-				addUser.token = jwt.sign(addUser, secret, {
+				token = jwt.sign(addUser, secret, {
           				expiresInMinutes: 1440 // expires in 24 hours
         			});
 				addUser.save(function(err, user){
@@ -42,7 +42,7 @@ router.post('/signup', function(req, res){
 					res.json({
         			success: true,
         			message: 'Enjoy your token !',
-        			token: addUser.token
+        			token: token
         		});	
 			})        		
 		}
@@ -61,17 +61,21 @@ router.post('/signin', function(req, res){
 		if (err) throw err;
 
 		if (!user) {
-			res.json({success: false, message: 'Authentication failed ! User not found'});
+			res.status(403).json({success: false, message: 'Authentication failed ! User not found'});
 		}
 		else if(user) {
 
 			if (user.password != req.body.password) {
-				res.json({success: false, message: 'Authentication failed ! Wrong password'});	
+				res.status(403).json({success: false, message: 'Authentication failed ! Wrong password'});	
 			} else {
+					
+					token = jwt.sign(user, secret, {
+          				expiresInMinutes: 1440 // expires in 24 hours
+        			});
         		res.json({
         			success: true,
         			message: 'Enjoy your token !',
-        			token: user.token
+        			token: token
         		});
 			}
 		}

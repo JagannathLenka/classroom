@@ -1,22 +1,31 @@
-scotchApp.controller('loginController', function($scope, $http, $localStorage, $location) {
+scotchApp.controller('loginController', function($scope, $rootScope, $http, $localStorage, $location, Auth) {
 
 	$scope.message = null
 
 	$scope.login = function() {
 		
-	    var url = '/users/signin'
-	    return $http.post(url, {
-	    	 name: $scope.username,
-	         password: $scope.password
-	    }).success(function(data){
-	    	console.log(data);
-	        $localStorage.token = data.token;
-	        $location.path('/welcome');
+		Auth.login(
+			{
+	    		name: $scope.username,
+	         	password: $scope.password
+	   		}, 
+        	function(data){
+        		$localStorage.token = data.token;
+        		$location.path('/welcome')
+  			}, 
+  		 	function(message){
+           		$scope.message = message.message;
+           		$location.path('/')
+        	}    
+	    );
+	};
 
-	    }).error(function(message){
-	            $scope.message = message.message;
-
-	    	});
+	$scope.logout = function() {
+	        Auth.logout(function() {
+	        	console.log('Logged Out')
+	        });
 	 };
+
+
 
 });

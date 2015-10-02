@@ -1,4 +1,5 @@
-scotchApp.controller('courseController', function($scope, $http,  $interval, $routeParams, $modal, $log) {
+scotchApp.controller('courseController', function($scope, $http,  $interval, $routeParams, $modal, $log, $localStorage, Auth) {
+
 	$scope.youtubeurl = "";
 
 	$http.get('/api/course').
@@ -12,9 +13,21 @@ scotchApp.controller('courseController', function($scope, $http,  $interval, $ro
 	    // or server returns response with an error status.
 	  });
 
+	 $scope.authorized = function (requestedScope) {
+
+	 	if (! Auth.getTokenClaims().scope) {
+	 		return false;
+	 	}
+
+		if ((Auth.getTokenClaims().scope).indexOf(requestedScope) >= 0 ) {
+			return true;
+		}	
+
+		return false
+	};
+
+
 	$scope.open = function (id) {
-		console.log(id);
-		$scope.items = ['item1', 'item2', 'item3'];
 	    var modalInstance = $modal.open({
 	     //animation: $scope.animationsEnabled,
 	     templateUrl: '/pages/page-add-video.html',
@@ -66,13 +79,11 @@ scotchApp.controller('courseModalController', function($scope, $http, $modalInst
   	dataObj = {id: $scope.id,
   			  name: name,
   			  url: url}
-  			  console.log(dataObj)
   	var res = $http.post('/course', dataObj).
 			success(function(data, status, headers, config) {
     			// this callback will be called asynchronously
     			// when the response is available
     			$scope.success = true;
-    			console.log('it is working');
     			$modalInstance.close($scope.success);
     	      	}).
  	 		error(function(data, status, headers, config) {
