@@ -1,42 +1,49 @@
-var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootstrap', 'ngStorage']);
+var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootstrap', 'ngStorage', 'ui.router']);
 
 
 
 	// configure our routes
-    scotchApp.config(function($routeProvider) {
-        $routeProvider
+   scotchApp.config(function($stateProvider, $urlRouterProvider) {
+    
+    $urlRouterProvider.otherwise('/');
+    
+    $stateProvider
 
             // route for the home page
-            .when('/', {
+            .state('/', {
+                url: '/',
                 templateUrl : '/pages/page-login.html',
                 controller  : 'loginController'
             })
 
             // route for the welcome page
-            .when('/welcome', {
+            .state('welcome', {
+                url: '/welcome',
                 templateUrl : '/pages/page-welcome.html',
                 controller  : 'courseController'
             })
 
             // route for the about page
-            .when('/video', {
+            .state('video', {
+                url: '/video',
                 templateUrl : '/pages/page-video.html',
                 controller  : 'courseController'
             })
 
             // route for the contact page
-            .when('/assesment', {
+            .state('assesment', {
+                url: '/assesment',
                 templateUrl : '/pages/page-asses.html',
                 controller  : 'assesmentController'
             })
             // route for the contact page
-            .when('/add-video/:id', {
+            .state('add-video/:id', {
                 templateUrl : '/pages/page-add-video.html',
                 controller  : 'courseController'
             })
 
              // route for the contact page
-            .when('/story-time', {
+            .state('story-time', {
                 templateUrl : '/pages/page-story-time.html',
                 controller  : 'courseController'
             });

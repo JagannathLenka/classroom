@@ -28,7 +28,7 @@ scotchApp.controller('assesmentController', function($scope, $http, $interval) {
             dataObj = {id: person._id,
                       gold_score: person.gold_score + 1
                     }
-            var res = $http.post('/score', dataObj).
+            var res = $http.post('/api/score', dataObj).
                      success(function(data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
