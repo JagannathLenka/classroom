@@ -46,7 +46,7 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
              // route for the contact page
             .when('/story-time', {
                 templateUrl : '/pages/page-story-time.html',
-                controller  : 'storyController'
+                controller  : 'courseController'
             });
     });
 
