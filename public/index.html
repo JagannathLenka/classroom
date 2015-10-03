@@ -37,17 +37,17 @@
                 </div>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-                    <li><a href="#video"><i class="fa fa-shield"></i>Video Galary</a></li>
-                    <li><a href="#assesment"><i class="fa fa-comment"></i> Take a Test</a></li>
-                    <li><span><a href="#story-time"><i class="fa fa-comment"></i> Story Time</a></span></li>
+                    <li><a ui-sref="welcome" ><i class="fa fa-home"></i> Home</a></li>
+                    <li><a ui-sref="video"><i class="fa fa-shield"></i>Video Galary</a></li>
+                    <li><a ui-sref="assesment"><i class="fa fa-comment"></i> Take a Test</a></li>
+                    <li><span><a ui-sref="story-time"><i class="fa fa-comment"></i> Story Time</a></span></li>
                    <li>
                     <span class="nav" dropdown on-toggle="toggled(open)">
                         <a href="" class="dropdown-toggle nav" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
                           Welcome {{name}}<span class="caret"></span>
                         </a>
                       <ul class="dropdown-menu">
-                        <li><a href="#logout">Log Out</a></li>
+                        <li><a ui-sref="logout">Log Out</a></li>
                         <li class="divider"></li>
                      </ul>
                     </span>
@@ -60,7 +60,7 @@
         <!-- MAIN CONTENT AND INJECTED VIEWS -->
         <div id="main">
 
-          <div ng-view class="page"></div>
+          <div ui-view class="page"></div>
           
 
             <!-- angular templating -->
