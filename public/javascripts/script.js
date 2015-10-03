@@ -15,9 +15,15 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
                 controller  : 'loginController'
             })
 
-             .state('/logout', {
-                templateUrl : '/pages/page-logout.html',
-                controller  : 'loginController'
+             .state('logout', {
+                url:          '/',
+                templateUrl : '/pages/page-login.html',
+                controller  : 'loginController',
+                onEnter     :  function(Auth, $stateParams) {
+                                  Auth.logout(function(){
+                                     console.log('Logged Out');
+                                  });
+                               }
             })
 
 
@@ -32,7 +38,7 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
             .state('video', {
                 url: '/video',
                 templateUrl : '/pages/page-video.html',
-                controller  : 'courseController'
+                controller  : 'courseController',
             })
 
             // route for the contact page
@@ -118,6 +124,7 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
            },
            logout: function (success) {
                tokenClaims = {};
+               console.log('here');
                delete $localStorage.token;
                success();
            },
