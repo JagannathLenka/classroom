@@ -5,10 +5,10 @@
                 
                 <div class="video-container">
 
-                    <div ng-repeat="video in course.videos" class="slide">
-                        <div> Name: {{video.name}} </div>                
+                    <div ng-repeat="video in course.videos" class="slide" >
+                        <div class="video-description"> Name: {{video.name}} </div>                
                         <div style="float:left;">
-                            <iframe width="350" height="250" class="embed-responsive-item" src={{video.url}} allowfullscreen>
+                            <iframe width="{{width}}" height="{{height}}" class="embed-responsive-item" src={{video.url}} allowfullscreen>
                              </iframe>      
                         <div>        
                     </div> 

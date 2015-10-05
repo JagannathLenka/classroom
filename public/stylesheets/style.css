@@ -63,6 +63,13 @@ textarea {
     /*float: left;*/
 }
 
+.video-description
+{
+    width: 350px;
+    height: 20px;
+}
+
+
 
 .container {
   width: 1200px;

@@ -137,17 +137,19 @@ var scotchApp = angular.module('scotchApp', ['ngRoute' , 'ngAnimate', 'ui.bootst
 
 
     //Check if the user is logged in or not
-    scotchApp.run(function($rootScope, $localStorage, $location, Auth) {
-        $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+    scotchApp.run(function($rootScope, $state, $localStorage, $location, Auth) {
+        $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+          
            if(! $localStorage.token) {
-            if ( next.templateUrl != '/pages/page-login.html') {
-                    $location.path('/');
+            if ( toState.templateUrl != '/pages/page-login.html') {
+                    event.preventDefault();
+                    $state.go('logout');
                 } 
            }else{
-                if ( next.templateUrl === '/pages/page-logout.html') {
+                if ( toState.templateUrl === '/pages/page-logout.html') {
                     Auth.logout(function() {
-                        console.log('Logged Out');
                         $rootScope.loggdinUser = null;
+                        event.preventDefault();
                         $location.path('/');
                     });
                 };    

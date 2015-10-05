@@ -1,6 +1,19 @@
 scotchApp.controller('courseController', function($scope, $http,  $interval, $routeParams, $modal, $log, $localStorage, Auth) {
 
 	$scope.youtubeurl = "";
+	$scope.height = "250px";
+	$scope.width  = "350px";
+
+	$scope.mouseover = function() {
+		console.log('mouse')
+		$scope.height = "300px";
+		$scope.width  = "400px";
+	}
+
+	$scope.mousedown = function() {
+		$scope.height = "250px";
+		$scope.width  = "350px";
+	}
 
 	$http.get('/api/course').
 	  then(function(response) {
@@ -79,7 +92,7 @@ scotchApp.controller('courseModalController', function($scope, $http, $modalInst
   	dataObj = {id: $scope.id,
   			  name: name,
   			  url: url}
-  	var res = $http.post('/course', dataObj).
+  	var res = $http.post('/api/course', dataObj).
 			success(function(data, status, headers, config) {
     			// this callback will be called asynchronously
     			// when the response is available
